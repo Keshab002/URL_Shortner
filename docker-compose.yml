@@ -1,0 +1,37 @@
+services:
+  url-shortner:
+    container_name: url-shortner
+    image: url-shortner
+    build: .
+    ports:
+      - "8001:8001"
+    depends_on:
+      - mongo-container
+    networks:
+      - my-network
+    restart: always
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  mongo-container:
+    container_name: mongo-container
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - my-network
+    command: [ "mongod", "--quiet", "--logpath", "/dev/null" ]
+    logging:
+      driver: "none"
+    restart: always
+
+volumes:
+  mongo-data:
+
+
+networks:
+  my-network:
+    driver: bridge

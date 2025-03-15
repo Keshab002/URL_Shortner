@@ -30,6 +30,11 @@ async function handleGetShortUrl(req, res) {
       },
     }
   );
+  if (!entry) {
+    console.error("No entry found for the given short URL");
+    return res.status(404).json({ error: "Short URL not found" });
+  }
+  
   console.log(entry.redirectUrl);
   return res.redirect(entry.redirectUrl);
 }

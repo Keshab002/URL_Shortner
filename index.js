@@ -5,7 +5,7 @@ const router = require("./Routes/Url");
 const app = express();
 const PORT = 8001;
 
-connectToDatabase("mongodb://127.0.0.1:27017/Short-Url")
+connectToDatabase("mongodb://mongo-container:27017/Short-Url")
   .then(() => {
     console.log("MongoDb Successfully Connected");
   })
