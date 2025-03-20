@@ -1,6 +1,5 @@
 const generateShortId = require("ssid");
 const URL = require("../Models/Url");
-// const { URL } = require("../Models/Url");
 
 async function handleGenerateShortUrl(req, res) {
   const body = req.body;
@@ -34,14 +33,17 @@ async function handleGetShortUrl(req, res) {
     console.error("No entry found for the given short URL");
     return res.status(404).json({ error: "Short URL not found" });
   }
-  
-  console.log(entry.redirectUrl);
+
   return res.redirect(entry.redirectUrl);
 }
 
 const handleGetAnalyticsShortUrl = async (req, res) => {
   const shortId = req.params.shortUrl;
   const entry = await URL.findOne({ shortId });
+  if (!entry) {
+    console.error("No entry found for the given short URL");
+    return res.status(404).json({ error: "Short URL not found" });
+  }
   return res
     .status(200)
     .json({

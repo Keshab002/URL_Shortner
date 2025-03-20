@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hello from the server boss!</h1>
+    <form id="url-short-forms">
+        <div>
+            <label>Enter the Url :- </label>
+            <input name="url" placeholder="https://example.com" />
+        </div>
+        <br />
+        <button type="submit">Submit</button>
+    </form>
+    <br />
+    <br />
+    <div>
+        <h1>Analytics of Visited URL</h1>
+    </div>
+    <table>
+        <tr>
+            <th style="border: 1px solid black;">
+                Short Id
+            </th>
+            <th style="border: 1px solid black;">
+                Redirect Url
+            </th>
+            <th style="border: 1px solid black;">
+                No. of Times Visited
+            </th>
+        </tr>
+        <% (data || []).forEach(element=> { %>
+            <tr>
+                <td style="border: 1px solid black; text-align: center;">
+                    <%= element.shortId %>
+                </td>
+                <td style="border: 1px solid black; text-align: center;">
+                    <%= element.redirectUrl %>
+                </td>
+                <td style="border: 1px solid black; text-align: center;">
+                    <%= element.visitHistory.length %>
+                </td>
+            </tr>
+            <% }) %>
+    </table>
+    <br />
+    <br />
+    <span class="response-text"></span>
+    <script src="/script.js"></script>
+</body>
+
+</html>
